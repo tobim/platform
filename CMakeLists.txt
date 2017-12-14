@@ -19,8 +19,7 @@ include(CMakePackageConfigHelpers)
 configure_package_config_file(
   cmake/platform-config.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/cmake/platform-config.cmake"
-  INSTALL_DESTINATION lib/cmake/platform
-  NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+  INSTALL_DESTINATION lib/cmake/platform)
 
 write_basic_package_version_file(
   "${CMAKE_CURRENT_BINARY_DIR}/cmake/platform-config-version.cmake"
@@ -28,18 +27,22 @@ write_basic_package_version_file(
 
 # Export.
 export(
-  TARGETS platform
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/platform-targets.cmake")
+    TARGETS ${PROJECT_NAME}
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/platform-targets.cmake"
+  EXPORT_LINK_INTERFACE_LIBRARIES)
 
 # Install.
-install(TARGETS platform EXPORT platform)
+install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    COMPONENT ${PROJECT_NAME})
 
-install(
-  EXPORT platform
+install(EXPORT ${PROJECT_NAME}
   FILE platform-targets.cmake
   DESTINATION lib/cmake/platform)
 
-install(DIRECTORY include DESTINATION include)
+install(DIRECTORY include/${PROJECT_NAME} DESTINATION include)
 
 install(
   FILES

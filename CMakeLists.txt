@@ -13,6 +13,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::boost)
 
+target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CXX_COMPILER_ID:GNU>:-frecord-gcc-switches>")
+
 # Config.
 include(CMakePackageConfigHelpers)
 
@@ -27,7 +29,7 @@ write_basic_package_version_file(
 
 # Export.
 export(
-    TARGETS ${PROJECT_NAME}
+  TARGETS ${PROJECT_NAME}
   FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/platform-targets.cmake"
   EXPORT_LINK_INTERFACE_LIBRARIES)
 

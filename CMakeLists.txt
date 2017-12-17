@@ -12,7 +12,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::boost)
-
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_constexpr)
 target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CXX_COMPILER_ID:GNU>:-frecord-gcc-switches>")
 
 # Config.
